@@ -1,37 +1,30 @@
 #include <iostream>
 using namespace std;
 
-int binarySearch(int arr[], int low, int high, int key) {
-    if (low <= high) {
-        int mid = (low + high) / 2;
+int main()
+{
+    int arr[5] = {10, 20, 30, 40, 50};
+    int key = 40;
+    int low = 0, high = 4, mid;
+    int pos = -1;
 
-        if (arr[mid] == key)
-            return mid;
-        else if (key < arr[mid])
-            return binarySearch(arr, low, mid - 1, key);
+    while(low <= high)
+    {
+        mid = (low + high) / 2;
+
+        if(arr[mid] == key)
+        {
+            pos = mid;
+            break;
+        }
+        else if(arr[mid] < key)
+            low = mid + 1;
         else
-            return binarySearch(arr, mid + 1, high, key);
+            high = mid - 1;
     }
-    return -1;
-}
 
-int main() {
-    int n, key;
-    cout << "Enter number of elements: ";
-    cin >> n;
-
-    int arr[n];
-    cout << "Enter sorted elements: ";
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    cout << "Enter element to search: ";
-    cin >> key;
-
-    int result = binarySearch(arr, 0, n - 1, key);
-
-    if (result != -1)
-        cout << "Element found at position: " << result + 1;
+    if(pos != -1)
+        cout << "Element found at index " << pos;
     else
         cout << "Element not found";
 
